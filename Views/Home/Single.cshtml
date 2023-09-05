@@ -1,0 +1,19 @@
+﻿@model System.Data.DataTable
+
+
+<h1>Single Record:--</h1>
+@{ 
+    System.Data.DataRow row = @Model.Rows[0];
+}
+<p>
+    Id : @row["id"]
+</p>
+<p>
+    Name : @row["name"]
+</p>
+<p>
+    Email : @row["email"]
+</p>
+<p>
+    Gender : @row["gender"]
+</p>

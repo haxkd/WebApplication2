@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using WebApplication2.Models;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Data;
 
 namespace WebApplication2.Controllers
 {
@@ -26,7 +27,37 @@ namespace WebApplication2.Controllers
             SqlCommand cmd = new SqlCommand(query, connection);
             cmd.ExecuteNonQuery();
             connection.Close();
+
+
             return View();
-        }       
+        } 
+        
+        public ActionResult Show()
+        {
+            string query = "SELECT * FROM Employee";
+            connection.Open();
+            DataTable data = new DataTable();
+            SqlCommand cmd = new SqlCommand(query, connection);
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);// fetch multiple data records
+            adapter.Fill(data);
+            return View(data);
+        }
+
+        public ActionResult Single(int? id)
+        {
+            string query = $"SELECT * FROM Employee WHERE id='{id}'";
+            connection.Open();
+            DataTable data = new DataTable();
+            SqlCommand cmd = new SqlCommand(query, connection);
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);// fetch multiple data records
+            adapter.Fill(data);
+            if (data.Rows.Count == 0)
+            {
+                return RedirectToAction("Show");
+            }
+
+            return View(data);
+        }
+
     }
 }
