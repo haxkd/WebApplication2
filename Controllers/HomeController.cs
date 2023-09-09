@@ -27,8 +27,6 @@ namespace WebApplication2.Controllers
             SqlCommand cmd = new SqlCommand(query, connection);
             cmd.ExecuteNonQuery();
             connection.Close();
-
-
             return View();
         } 
         
@@ -57,6 +55,32 @@ namespace WebApplication2.Controllers
             }
 
             return View(data);
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            string query = $"SELECT * FROM Employee WHERE id='{id}'";
+            connection.Open();
+            DataTable data = new DataTable();
+            SqlCommand cmd = new SqlCommand(query, connection);
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);// fetch multiple data records
+            adapter.Fill(data);
+            if (data.Rows.Count == 0)
+            {
+                return RedirectToAction("Show");
+            }
+            return View(data);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int? id,Employee emp)
+        {
+            string query = $"UPDATE Employee SET name='{emp.UserName}',email='{emp.UserEmail}',gender='{emp.UserGender}',password='{emp.UserPassword}' WHERE id='{id}'";
+            connection.Open();
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.ExecuteNonQuery();
+            connection.Close();
+            return RedirectToAction("Show");
         }
 
     }

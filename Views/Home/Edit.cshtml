@@ -1,0 +1,61 @@
+﻿@model System.Data.DataTable
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit A record</h2>
+
+@{
+    System.Data.DataRow row = @Model.Rows[0];
+}
+
+
+<form method="post">
+
+    Name : <input type="text" name="UserName" value='@row["name"]' /> <!-- column name from table -->
+    <br />
+    <br />
+
+    Email : <input type="email" name="UserEmail" value='@row["email"]' />
+    <br />
+    <br />
+
+    Gender :
+
+
+    @if (row["gender"].ToString() == "male")
+    {
+        <label><input type="radio" name="UserGender" value="male" checked /> male</label>
+    }
+    else
+    {
+        <label><input type="radio" name="UserGender" value="male" /> male</label>
+    }
+
+    @if (row["gender"].ToString() == "female")
+    {
+        <label><input type="radio" name="UserGender" value="female" checked /> female</label>
+    }
+    else
+    {
+        <label><input type="radio" name="UserGender" value="female" /> female</label>
+    }
+
+    @if (row["gender"].ToString() == "other")
+    {
+        <label><input type="radio" name="UserGender" value="other" checked /> other</label>
+    }
+    else
+    {
+        <label><input type="radio" name="UserGender" value="other" /> other</label>
+    }
+
+    <br />
+    <br />
+
+    Password : <input type="password" name="UserPassword" value='@row["password"]' />
+    <br />
+    <br />
+    <input type="submit" value="update" />
+
+</form>
