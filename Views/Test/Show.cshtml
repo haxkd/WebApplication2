@@ -1,0 +1,27 @@
+﻿@model List<WebApplication2.Models.Employee>
+<h1>All Datas:-- </h1>
+<table border>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Show</th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (WebApplication2.Models.Employee emp in Model)
+        {
+            <tr>
+                <td>@emp.id </td>
+                <td>@emp.name</td>
+                <td>@emp.email</td>
+                <td>@emp.gender</td>
+                <td><a href='/Home/Single/@emp.id'>Show</a></td>
+                <td><a href='/Home/Edit/@emp.id'>Edit</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

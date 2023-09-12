@@ -20,9 +20,9 @@ namespace WebApplication2.Controllers
 
 
         [HttpPost]
-        public ActionResult Index(Employee emp)
+        public ActionResult Index(DtoEmployee emp)
         {
-            string query = $"INSERT INTO Employee(name,email,gender,password) VALUES ('{emp.UserName}','{emp.UserEmail}','{emp.UserGender}','{emp.UserPassword}')";
+            string query = $"INSERT INTO Employee(name,email,gender,password) VALUES ('{emp.name}','{emp.email}','{emp.gender}','{emp.password}')";
             connection.Open();
             SqlCommand cmd = new SqlCommand(query, connection);
             cmd.ExecuteNonQuery();
@@ -75,7 +75,7 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public ActionResult Edit(int? id,Employee emp)
         {
-            string query = $"UPDATE Employee SET name='{emp.UserName}',email='{emp.UserEmail}',gender='{emp.UserGender}',password='{emp.UserPassword}' WHERE id='{id}'";
+            string query = $"UPDATE Employee SET name='{emp.name}',email='{emp.email}',gender='{emp.gender}',password='{emp.password}' WHERE id='{id}'";
             connection.Open();
             SqlCommand cmd = new SqlCommand(query, connection);
             cmd.ExecuteNonQuery();
